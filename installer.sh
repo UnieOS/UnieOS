@@ -42,6 +42,7 @@ UCOMPDIR="$DIR/usr/local/ucomp"
 command -v "git" >/dev/null && echo -e "${BLUE}[I]${RESET}: git is installed. Continue" || sudo apt install -y git
 command -v "curl" >/dev/null && echo -e  "${BLUE}[I]${RESET}: curl is installed. Continue" || sudo apt install -y curl
 command -v "make" >/dev/null && echo -e "${BLUE}[I]${RESET}: make is installed. Continue" || sudo apt install -y make
+command -v "clang" >/dev/null && echo -e "${BLUE}[I]${RESET}: clang is installed. Continue" || sudo apt install -y clang
 sudo curl -L https://raw.githubusercontent.com/UnieOS/UnieOS/refs/heads/unie-0.1.0/usr.bin/utop.c -o "$DIR/usr/local/ucomp/utop.c"
 sudo clang "$UCOMPDIR/utop.c" -v -o "$DIR/usr/bin/utop"
 exit 0 # Script on development. Wait
