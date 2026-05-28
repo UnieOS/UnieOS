@@ -39,10 +39,25 @@ sudo mkdir -p "$DIR/usr/local"
 sudo mkdir -p "$DIR/usr/local/ucomp"
 sudo mkdir -p "$DIR/usr/bin"
 UCOMPDIR="$DIR/usr/local/ucomp"
+sudo mkdir -p "$DIR/dev"
+sudo mkdir -p "$DIR/sys"
+sudo mkdir -p "$DIR/proc"
+sudo mkdir -p "$DIR/usr/lib64"
+sudo mkdir -p "$DIR/usr/lib"
+echo -e "${RED}[WARNING]${RESET} After using UnieOS, PLEASE REBOOT YOU COMPUTER FOR UNMOUNT BIND MOUNTS!"
+sudo mount --bind /dev "$DIR/dev"
+sudo mount --bind /sys "$DIR/sys"
+sudo mount --bind /proc "$DIR/proc"
+sudo mount --rbind /usr/lib64 "$DIR/usr/lib64"
+sudo mount --rbind /usr/lib "$DIR/usr/lib"
 command -v "git" >/dev/null && echo -e "${BLUE}[I]${RESET}: git is installed. Continue" || sudo apt install -y git
 command -v "curl" >/dev/null && echo -e  "${BLUE}[I]${RESET}: curl is installed. Continue" || sudo apt install -y curl
 command -v "make" >/dev/null && echo -e "${BLUE}[I]${RESET}: make is installed. Continue" || sudo apt install -y make
 command -v "clang" >/dev/null && echo -e "${BLUE}[I]${RESET}: clang is installed. Continue" || sudo apt install -y clang
 sudo curl -L https://raw.githubusercontent.com/UnieOS/UnieOS/refs/heads/unie-0.1.0/usr.bin/utop.c -o "$DIR/usr/local/ucomp/utop.c"
 sudo clang "$UCOMPDIR/utop.c" -v -o "$DIR/usr/bin/utop"
+sudo rm -f "$UCOMPDIR/utop.c"
+sudo curl -L https://raw.githubusercontent.com/UnieOS/UnieOS/refs/heads/unie-0.1.0/usr.bin/panic.cpp -o "$UCOMPDIR/panic.cpp"
+sudo clang++ $UCOMPDIR/panic.cpp -o "$DIR/usr/bin/panic"
+sudo rm -f "$UCOMPDIR/panic.cpp"
 exit 0 # Script on development. Wait
