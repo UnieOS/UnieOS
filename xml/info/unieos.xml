@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="https://unieos.github.io/schema/1">
+  <works-on>Debian-based Linux distributions</works-on>
+   <extending>Arch Linux based Linux Distributions</extending>
+  <writtenon>C, C++, Shell scripting</writtenon>
+  <github>UnieOS</github>
+  <website>unieos.github.io</website>
+</root>
