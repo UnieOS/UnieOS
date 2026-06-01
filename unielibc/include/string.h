@@ -1,5 +1,5 @@
-#ifndef MYLIBC_STRING_H
-#define MYLIBC_STRING_H
+#ifndef UNIELIBC_STRING_H
+#define UNIELIBC_STRING_H
 // written by llms
 // caution
 
@@ -10,4 +10,3 @@ void *memcpy(void *dest, const void *src, size_t n);
 long write(int fd, const void *buf, size_t count);
 
 #endif
-
