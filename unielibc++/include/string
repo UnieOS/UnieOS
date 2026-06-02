@@ -1,0 +1,20 @@
+#ifndef UNIELIBCXX_STRING
+#define UNIELIBCXX_STRING
+// written by llms
+// caution
+
+namespace std {
+    class string {
+    private:
+        const char* _data;
+        unsigned long _size;
+
+    public:
+        string(const char* s);
+        const char* c_str() const;
+        unsigned long size() const;
+    };
+}
+
+#endif
+
