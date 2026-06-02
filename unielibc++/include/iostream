@@ -1,0 +1,21 @@
+#ifndef UNIELIBCXX_IOSTREAM
+#define UNIELIBCXX_IOSTREAM
+// written by llms
+// caution
+
+#include "string"
+
+namespace std {
+    class ostream {
+    public:
+        ostream& operator<<(const char* s);
+        ostream& operator<<(const string& s);
+        ostream& operator<<(ostream& (*manip)(ostream&));
+    };
+
+    extern ostream cout;
+    ostream& endl(ostream& os);
+}
+
+#endif
+
