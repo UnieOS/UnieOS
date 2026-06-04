@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.3">
+  <Document>
+    <name>UnieOS_Local</name>
+
+    <Folder>
+      <name>Country</name>
+
+      <Placemark>
+        <name>Brazil</name>
+        <description>UnieOS country origin</description>
+      </Placemark>
+
+    </Folder>
+
+    <Folder>
+      <name>State</name>
+
+      <Placemark>
+        <name>São Paulo</name>
+        <description>UnieOS origin state</description>
+      </Placemark>
+
+    </Folder>
+
+  </Document>
+</kml>
