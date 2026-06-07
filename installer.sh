@@ -1,18 +1,9 @@
 #!/bin/bash
-DIR="/mnt/unie-os-x86"
-RED="\033[31m"
-GREEN="\033[32m"
-YELLOW="\033[33m"
-BLUE="\033[34m"
-MAGENTA="\033[35m"
-CYAN="\033[36m"
-WHITE="\033[37m"
-RESET="\033[0m"
 
-echo "UnieOS installer for x86 and x86_64 architectures, and for Debian GNU/Linux"
-echo "https://github.com/UnieOS/"
-echo "https://unieos.github.io/"
-arch="$(uname -m)"
+RED="\e[31m"
+RESET="\e[0m"
+
+arch=$(uname -m)
 
 case "$arch" in
   x86_64|i386|i686)
@@ -24,40 +15,31 @@ case "$arch" in
 esac
 
 if [ -f /etc/os-release ]; then
-  . /etc/os-release
-  echo "$ID $ID_LIKE" | grep -qi debian || {
+  if ! grep -qiE 'debian' /etc/os-release; then
     echo -e "${RED}[E]${RESET}: Not Debian or Debian-based distro."
     exit 1
-  }
+  fi
 else
-  echo -e  "${RED}[E]${RESET}: This environment is not a Linux distribution! Exiting"
+  echo -e "${RED}[E]${RESET}: This environment is not a Linux distribution! Exiting"
   exit 1
 fi
-sudo mkdir -p "$DIR"
-sudo mkdir -p "$DIR/usr"
-sudo mkdir -p "$DIR/usr/local"
-sudo mkdir -p "$DIR/usr/local/ucomp"
-sudo mkdir -p "$DIR/usr/bin"
-UCOMPDIR="$DIR/usr/local/ucomp"
-sudo mkdir -p "$DIR/dev"
-sudo mkdir -p "$DIR/sys"
-sudo mkdir -p "$DIR/proc"
-sudo mkdir -p "$DIR/usr/lib64"
-sudo mkdir -p "$DIR/usr/lib"
-echo -e "${RED}[WARNING]${RESET} After using UnieOS, PLEASE REBOOT YOU COMPUTER FOR UNMOUNT BIND MOUNTS!"
-sudo mount --bind /dev "$DIR/dev"
-sudo mount --bind /sys "$DIR/sys"
-sudo mount --bind /proc "$DIR/proc"
-sudo mount --rbind /usr/lib64 "$DIR/usr/lib64"
-sudo mount --rbind /usr/lib "$DIR/usr/lib"
-command -v "git" >/dev/null && echo -e "${BLUE}[I]${RESET}: git is installed. Continue" || sudo apt install -y git
-command -v "curl" >/dev/null && echo -e  "${BLUE}[I]${RESET}: curl is installed. Continue" || sudo apt install -y curl
-command -v "make" >/dev/null && echo -e "${BLUE}[I]${RESET}: make is installed. Continue" || sudo apt install -y make
-command -v "clang" >/dev/null && echo -e "${BLUE}[I]${RESET}: clang is installed. Continue" || sudo apt install -y clang
-sudo curl -L https://raw.githubusercontent.com/UnieOS/UnieOS/refs/heads/unie-0.1.0/usr.bin/utop.c -o "$DIR/usr/local/ucomp/utop.c"
-sudo clang "$UCOMPDIR/utop.c" -v -o "$DIR/usr/bin/utop"
-sudo rm -f "$UCOMPDIR/utop.c"
-sudo curl -L https://raw.githubusercontent.com/UnieOS/UnieOS/refs/heads/unie-0.1.0/usr.bin/panic.cpp -o "$UCOMPDIR/panic.cpp"
-sudo clang++ $UCOMPDIR/panic.cpp -o "$DIR/usr/bin/panic"
-sudo rm -f "$UCOMPDIR/panic.cpp"
-exit 0 # Script on development. Wait
+
+DIR_x86=/mnt/unieos
+
+command -v sudo >/dev/null 2>&1 || {
+  echo "sudo is not installed. Please install sudo!"
+  exit 1
+}
+
+command -v debootstrap >/dev/null 2>&1 || sudo apt install -y debootstrap
+command -v clang >/dev/null 2>&1 || sudo apt install -y clang
+command -v git >/dev/null 2>&1 || sudo apt install -y git
+command -v curl >/dev/null 2>&1 || sudo apt install -y curl libcurl4
+
+mkdir -p "$DIR_x86"
+
+sudo debootstrap trixie "$DIR_x86" http://deb.debian.org/debian
+rm -f "$DIR_x86"/etc/os-release
+curl -L "https://raw.githubusercontent.com/UnieOS/UnieOS/refs/heads/unie-0.1.0/etc/os-release"  -o "$DIR_x86"/etc/os-release
+echo "This script is still on development."
+exit 0
