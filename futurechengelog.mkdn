@@ -1,0 +1,7 @@
+# Future changelog - UnieOS 0.1.0 alpha 2 "paper" (INCOMPLETE!)
+
+---
+
+- Add customized /etc/os-release
+- Switch from mannual cp, mv and others to debootstrap
+- Remake installer (continuing in Shell)
