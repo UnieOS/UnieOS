@@ -1,0 +1,8 @@
+NAME="UnieOS"      
+VERSION="0.1.0-alpha1"      
+ID="unieos"      
+ID_LIKE="debian"      
+PRETTY_NAME="UnieOS 0.1.0-alpha1"      
+VERSION_ID="0.1.0"      
+VERSION_CODENAME="paper"    
+HOME_URL="https://unieos.github.io"      
