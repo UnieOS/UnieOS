@@ -1,0 +1,34 @@
+* text=auto
+
+*.c linguist-language=C
+*.h linguist-language=C
+
+*.cpp linguist-language=C++
+*.hpp linguist-language=C++
+
+*.s linguist-language=Assembly
+*.asm linguist-language=Assembly
+
+*.sh linguist-language=Shell
+*.bash linguist-language=Shell
+
+*.ps1 linguist-language=PowerShell
+*.psm1 linguist-language=PowerShell
+*.cmd linguist-language=Batch
+
+*.html linguist-language=HTML
+*.js linguist-language=JavaScript
+
+*.xml linguist-language=XML
+*.kml linguist-language=XML
+
+Makefile linguist-language=Makefile
+*.mk linguist-language=Makefile
+
+*.md linguist-documentation
+LICENSE linguist-documentation
+SECURITY.md linguist-documentation
+CODE_OF_CONDUCT.md linguist-documentation
+
+checksums.sha256sums linguist-generated=true
+futurechengelog.mkdn linguist-documentation
