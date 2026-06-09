@@ -2,12 +2,12 @@
 
 UNIEOS_DIR="/data/data/com.termux/files/usr/var/lib/proot-distro/containers/unieos/rootfs"
 
-pkg update
-pkg upgrade
-pkg install proot
-pkg install python3
-pkg install git
-pkg install clang
+apt-get update
+apt-get upgrade
+apt-get install proot
+apt-get install python3
+apt-get install git
+apt-get install clang
 
 pip install proot-distro
 
