@@ -16,6 +16,8 @@ echo "We will create a user in the sandbox environment. Enter a name."
 read -p "Name: " userName
 proot-distro login unieos -- useradd ${userName}
 proot-distro login unieos -- usermod -aG ${userName}
+proot-distro login unieos -- apt update 
+proot-distro login unieos -- apt upgrade
 
 mkdir -p "$TMPDIR/UnieOS"
 export UNIETMP="$TMPDIR/UnieOS"
